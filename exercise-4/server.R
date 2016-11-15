@@ -1,5 +1,7 @@
 # server.R
 library(dplyr)
+library(shiny)
+library(plotly)
 
 # Read in data
 setwd('~/Documents/info-201/m14-shiny/exercise-4/')
@@ -21,7 +23,9 @@ shinyServer(function(input, output) {
   output$map <- renderPlotly({ 
       return(BuildMap(joined.data, input$mapvar))
   }) 
-  
+  output$scatter <- renderPlotly({
+    Buildscatter(joined.data, input$search)
+  })
   # Create a `scatter` property on your `output` object. That property shoudl be a `renderPlotly` object that returns a scatterplot (`BuildScatter`)
   
 })
